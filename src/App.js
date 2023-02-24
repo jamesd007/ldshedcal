@@ -8,7 +8,9 @@ import './App.css';
 //suburb by inspecting the HTML source of the Eskom load shedding website.
 
 const getData=()=>{
-
+  //example of api call:
+  //curl --location --request GET 'https://developer.sepush.co.za/business/2.0/area?id=eskde-10-fourwaysext10cityofjohannesburggauteng'
+  
   fetch('https://crossorigin.me/https://loadshedding.eskom.co.za/LoadShedding/GetStatus?national=true')
   .then(response => response.json())
   .then(data => {
