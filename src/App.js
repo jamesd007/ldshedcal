@@ -1,23 +1,42 @@
 import logo from './logo.svg';
 import './App.css';
 
+//Note that the national=true parameter is used to retrieve the load shedding information
+//for the entire country. If you want to retrieve information for a specific region, 
+//you can replace national=true with municipalityId=<ID> or suburbId=<ID>, where <ID> is the ID
+//of the municipality or suburb you're interested in. You can find the ID of a municipality or
+//suburb by inspecting the HTML source of the Eskom load shedding website.
+
+const getData=()=>{
+
+  fetch('https://crossorigin.me/https://loadshedding.eskom.co.za/LoadShedding/GetStatus?national=true')
+  .then(response => response.json())
+  .then(data => {
+    console.log('Current load shedding status:', data.currentStage);
+    console.log('Next load shedding stage:', data.nextStage);
+    console.log('Load shedding schedules:', data.schedules);
+  })
+  .catch(error => {
+    console.error('Error fetching load shedding data:', error);
+  });
+
+
+// fetch('https://loadshedding.eskom.co.za/LoadShedding/GetStatus?national=true')
+//   .then(response => response.json())
+//   .then(data => {
+//     console.log('Current load shedding status:', data.currentStage);
+//     console.log('Next load shedding stage:', data.nextStage);
+//     console.log('Load shedding schedules:', data.schedules);
+//   })
+//   .catch(error => {
+//     console.error('Error fetching load shedding data:', error);
+//   });
+}
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+{getData()}
     </div>
   );
 }
